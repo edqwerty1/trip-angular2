@@ -26,6 +26,8 @@ gulp.task('compile-ts', function () {
     var sourceTsFiles = [config.allTypeScript,                //path to typescript files
         config.libraryTypeScriptDefinitions]; //reference to library .d.ts files
 
+    gulp.src(config.allTypeScript +'/**/*.json')
+        .pipe(gulp.dest(config.tsOutputPath));
 
     var tsResult = gulp.src(sourceTsFiles)
         .pipe(sourcemaps.init())
@@ -75,6 +77,7 @@ gulp.task('browserSync', function() {
 gulp.task('clean', function() {
     return del([config.build]);
 });
+
 
 
 gulp.task('build', ['compile-ts', 'clean'], function(){
