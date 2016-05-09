@@ -2,11 +2,12 @@ import { Component, OnInit } from 'angular2/core';
 import {Observable} from 'rxjs/RX';
 import {LocationStoreService} from './location-store.service';
 import {ILocation} from './models/locations';
+import {LocationThumbnailComponent} from './location-thumbnail.component';
 
 @Component({
     selector: 'locations',
     templateUrl: 'app/locations.component.html',
-    directives: []
+    directives: [LocationThumbnailComponent]
 })
 export class LocationsComponent  implements OnInit {   
         locations: Observable<ILocation[]>;
@@ -17,7 +18,6 @@ export class LocationsComponent  implements OnInit {
        ngOnInit() {
         this.locations = this._locationsStore.locations$;
         this._locationsStore.loadLocations();
-        console.log(this.locations);
         this.locations.subscribe(data => console.log(data));
     } 
 }

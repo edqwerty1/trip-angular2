@@ -22,10 +22,10 @@ export class LocationStoreService {
     };
 
     loadLocations() {
-        this._http.get('./test-data/locations.json')
+        this._http.get('/app/test-data/locations.json')
             .map((res: Response) => res.json())
             .subscribe(data => {
-                this._dataStore.locations = data.todos;
+                this._dataStore.locations = data.locations;
                 this._locationsObserver.next(this._dataStore.locations);
             },
             error => console.log(error)

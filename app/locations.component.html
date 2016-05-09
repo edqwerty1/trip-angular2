@@ -1,6 +1,7 @@
 
-    <ul class="list-group ">
-        <li class="list-group-item" *ngFor="#location of locations | async">
-            {{location.name}}
-        </li>
-    </ul>
+        <div class="row">
+        
+        <div  *ngFor="#location of locations | async">
+            <location-thumbnail [location]="location"></location-thumbnail>
+        </div>
+        </div>

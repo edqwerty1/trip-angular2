@@ -1,4 +1,4 @@
-System.register(['angular2/core', './location-store.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './location-store.service', './location-thumbnail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './location-store.service'], function(exports_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, location_store_service_1;
+    var core_1, location_store_service_1, location_thumbnail_component_1;
     var LocationsComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', './location-store.service'], function(exports_
             },
             function (location_store_service_1_1) {
                 location_store_service_1 = location_store_service_1_1;
+            },
+            function (location_thumbnail_component_1_1) {
+                location_thumbnail_component_1 = location_thumbnail_component_1_1;
             }],
         execute: function() {
             let LocationsComponent = class LocationsComponent {
@@ -28,7 +31,6 @@ System.register(['angular2/core', './location-store.service'], function(exports_
                 ngOnInit() {
                     this.locations = this._locationsStore.locations$;
                     this._locationsStore.loadLocations();
-                    console.log(this.locations);
                     this.locations.subscribe(data => console.log(data));
                 }
             };
@@ -36,7 +38,7 @@ System.register(['angular2/core', './location-store.service'], function(exports_
                 core_1.Component({
                     selector: 'locations',
                     templateUrl: 'app/locations.component.html',
-                    directives: []
+                    directives: [location_thumbnail_component_1.LocationThumbnailComponent]
                 }), 
                 __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
             ], LocationsComponent);

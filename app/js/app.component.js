@@ -33,7 +33,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', './b
         execute: function() {
             let AppComponent = class AppComponent {
                 constructor() {
-                    this.title = 'To Do List Implemented with Angular 2.0';
+                    this.title = 'Trip Planner Implemented with Angular 2.0';
                 }
             };
             AppComponent = __decorate([

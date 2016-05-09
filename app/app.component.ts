@@ -15,6 +15,6 @@ import {LocationStoreService} from './location-store.service';
     directives: [BannerComponent, LocationsComponent]
 })
 export class AppComponent {
-    title = 'To Do List Implemented with Angular 2.0';
+    title = 'Trip Planner Implemented with Angular 2.0';
     
 }
