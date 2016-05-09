@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', './banner.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/src/facade/browser'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,41 +10,37 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', './b
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, banner_component_1;
-    var AppComponent;
+    var core_1, browser_1;
+    var BannerComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (http_1_1) {
-                http_1 = http_1_1;
-            },
-            function (_1) {},
-            function (banner_component_1_1) {
-                banner_component_1 = banner_component_1_1;
+            function (browser_1_1) {
+                browser_1 = browser_1_1;
             }],
         execute: function() {
-            let AppComponent = class AppComponent {
+            let BannerComponent = class BannerComponent {
                 constructor() {
-                    this.title = 'To Do List Implemented with Angular 2.0';
+                    this.shrink = false;
+                }
+                onScroll(event) {
+                    this.shrink = browser_1.document.body.scrollTop > 50;
                 }
             };
-            AppComponent = __decorate([
+            BannerComponent = __decorate([
                 core_1.Component({
-                    selector: 'my-app',
-                    templateUrl: 'app/app.component.html',
-                    styleUrls: ['app/app.component.css'],
-                    providers: [
-                        http_1.HTTP_PROVIDERS
-                    ],
-                    directives: [banner_component_1.BannerComponent]
+                    selector: 'banner-shrink',
+                    templateUrl: 'app/banner.component.html',
+                    styleUrls: ['app/banner.component.css'],
+                    directives: []
                 }), 
                 __metadata('design:paramtypes', [])
-            ], AppComponent);
-            exports_1("AppComponent", AppComponent);
+            ], BannerComponent);
+            exports_1("BannerComponent", BannerComponent);
         }
     }
 });
 
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=banner.component.js.map
