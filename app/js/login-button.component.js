@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/src/facade/browser', './login-button.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,40 +10,42 @@ System.register(['angular2/core', 'angular2/src/facade/browser', './login-button
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, login_button_component_1;
-    var BannerComponent;
+    var core_1, ng2_bs3_modal_1;
+    var LoginButtonComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (browser_1_1) {
-                browser_1 = browser_1_1;
-            },
-            function (login_button_component_1_1) {
-                login_button_component_1 = login_button_component_1_1;
+            function (ng2_bs3_modal_1_1) {
+                ng2_bs3_modal_1 = ng2_bs3_modal_1_1;
             }],
         execute: function() {
-            let BannerComponent = class BannerComponent {
-                constructor() {
-                    this.shrink = false;
-                }
-                onScroll(event) {
-                    this.shrink = browser_1.document.body.scrollTop > 50;
-                }
+            let LoginButtonComponent = class LoginButtonComponent {
             };
-            BannerComponent = __decorate([
+            LoginButtonComponent = __decorate([
                 core_1.Component({
-                    selector: 'banner-shrink',
-                    templateUrl: 'app/banner.component.html',
-                    styleUrls: ['app/banner.component.css'],
-                    directives: [login_button_component_1.LoginButtonComponent]
+                    selector: 'login-button',
+                    template: `
+    <button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>
+
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">I'm a modal!</h4>
+    </modal-header>
+    <modal-body>
+        Hello World!
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+`,
+                    directives: [ng2_bs3_modal_1.MODAL_DIRECTIVES]
                 }), 
                 __metadata('design:paramtypes', [])
-            ], BannerComponent);
-            exports_1("BannerComponent", BannerComponent);
+            ], LoginButtonComponent);
+            exports_1("LoginButtonComponent", LoginButtonComponent);
         }
     }
 });
 
-//# sourceMappingURL=banner.component.js.map
+//# sourceMappingURL=login-button.component.js.map

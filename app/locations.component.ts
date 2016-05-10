@@ -9,15 +9,15 @@ import {LocationThumbnailComponent} from './location-thumbnail.component';
     templateUrl: 'app/locations.component.html',
     directives: [LocationThumbnailComponent]
 })
-export class LocationsComponent  implements OnInit {   
-        locations: Observable<ILocation[]>;
+export class LocationsComponent implements OnInit {
+    locations: Observable<ILocation[]>;
 
     constructor(private _locationsStore: LocationStoreService) {
     }
 
-       ngOnInit() {
+    ngOnInit() {
         this.locations = this._locationsStore.locations$;
         this._locationsStore.loadLocations();
         this.locations.subscribe(data => console.log(data));
-    } 
+    }
 }
