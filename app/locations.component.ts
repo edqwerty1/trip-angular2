@@ -8,16 +8,16 @@ import {ILocation} from './models/locations';
     templateUrl: 'app/locations.component.html',
     directives: []
 })
-export class LocationsComponent  implements OnInit {   
-        locations: Observable<ILocation[]>;
+export class LocationsComponent implements OnInit {
+    locations: Observable<ILocation[]>;
 
     constructor(private _locationsStore: LocationStoreService) {
     }
 
-       ngOnInit() {
+    ngOnInit() {
         this.locations = this._locationsStore.locations$;
         this._locationsStore.loadLocations();
         console.log(this.locations);
         this.locations.subscribe(data => console.log(data));
-    } 
+    }
 }
