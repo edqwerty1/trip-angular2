@@ -1,0 +1,17 @@
+<button type="button" class="btn btn-default navbar-btn" (click)="modal.open()">Login</button>
+
+<modal #loginModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">I'm a modal!</h4>
+    </modal-header>
+    <modal-body>
+        <div class="form-group">
+            <label for="textbox">I'm a textbox!</label>
+            <input autofocus type="text" class="form-control" id="textbox">
+        </div>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    </modal-footer>
+</modal>

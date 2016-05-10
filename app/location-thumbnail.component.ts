@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import {Observable} from 'rxjs/RX';
 import {LocationStoreService} from './location-store.service';
 import {ILocation} from './models/locations';

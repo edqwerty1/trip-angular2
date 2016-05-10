@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/RX', 'rxjs/add/operator/share', 'rxjs/add/operator/startWith'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator/share', 'rxjs/add/operator/startWith'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

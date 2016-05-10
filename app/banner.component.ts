@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core';
-import {document, window } from 'angular2/src/facade/browser';
+import { Component } from '@angular/core';
+import {document, window } from '@angular/platform-browser/src/facade/browser';
 import {LoginButtonComponent} from './login-button.component';
 
 @Component({

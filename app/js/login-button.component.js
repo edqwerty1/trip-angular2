@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(exports_1, context_1) {
+System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -22,23 +22,21 @@ System.register(['angular2/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(expor
             }],
         execute: function() {
             let LoginButtonComponent = class LoginButtonComponent {
+                close() {
+                    this.modal.close();
+                }
+                save() {
+                    this.modal.close();
+                }
             };
+            __decorate([
+                core_1.ViewChild('loginModal'), 
+                __metadata('design:type', ng2_bs3_modal_1.ModalComponent)
+            ], LoginButtonComponent.prototype, "modal", void 0);
             LoginButtonComponent = __decorate([
                 core_1.Component({
                     selector: 'login-button',
-                    template: `
-    <button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>
-
-<modal #modal>
-    <modal-header [show-close]="true">
-        <h4 class="modal-title">I'm a modal!</h4>
-    </modal-header>
-    <modal-body>
-        Hello World!
-    </modal-body>
-    <modal-footer [show-default-buttons]="true"></modal-footer>
-</modal>
-`,
+                    templateUrl: 'app/login-button.component.html',
                     directives: [ng2_bs3_modal_1.MODAL_DIRECTIVES]
                 }), 
                 __metadata('design:paramtypes', [])

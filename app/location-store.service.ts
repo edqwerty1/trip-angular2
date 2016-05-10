@@ -1,6 +1,6 @@
 import {ILocations, ILocation} from './models/locations';
-import { Injectable } from 'angular2/core';
-import {Http, Response, Headers} from 'angular2/http';
+import { Injectable } from '@angular/core';
+import {Http, Response, Headers} from '@angular/http';
 import {Observable, Observer} from 'rxjs/RX';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/startWith';
