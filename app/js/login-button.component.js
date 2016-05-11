@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'], function(exports_1, context_1) {
+System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http', '@angular/common'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_bs3_modal_1, http_1;
+    var core_1, ng2_bs3_modal_1, http_1, common_1;
     var LoginButtonComponent;
     return {
         setters:[
@@ -22,31 +22,42 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             }],
         execute: function() {
             let LoginButtonComponent = class LoginButtonComponent {
-                constructor(_http) {
+                constructor(_http, _formBuilder) {
                     this._http = _http;
+                    this._formBuilder = _formBuilder;
                     this.submitted = false;
-                    this.model = { username: "", password: "" };
+                    this.loginFormModel = this._formBuilder.group({
+                        'username': ['', common_1.Validators.required],
+                        'password': ['', common_1.Validators.required]
+                    });
                 }
                 close() {
                     this.modal.close();
                 }
-                test(form) {
-                    console.log(form);
-                    form.ngSubmit.emit();
-                }
                 onSubmit() {
-                    console.log("submitted");
-                    console.log(this.model);
+                    this.loginFormModel.markAsDirty();
+                    for (let control in this.loginFormModel.controls) {
+                        this.loginFormModel.controls[control].markAsDirty();
+                    }
+                    ;
+                    if (this.loginFormModel.dirty && this.loginFormModel.valid) {
+                        this.login();
+                        this.modal.close();
+                    }
                 }
                 login() {
                     this.submitted = true;
-                    let body = JSON.stringify(this.modal);
-                    this._http.post('http://localhost:3001/sessions/create', body, { headers: contentHeaders })
+                    let body = JSON.stringify({ "username": this.loginFormModel.value.username, "password": this.loginFormModel.value.password });
+                    this._http.post('http://localhost:8080/api/session/create', body)
+                        .map((res) => res.json())
                         .subscribe(response => {
-                        localStorage.setItem('jwt', response.json().id_token);
+                        localStorage.setItem('jwt', response.token);
                     }, error => {
                         alert(error.text());
                         console.log(error.text());
@@ -63,7 +74,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
                     templateUrl: 'app/login-button.component.html',
                     directives: [ng2_bs3_modal_1.MODAL_DIRECTIVES]
                 }), 
-                __metadata('design:paramtypes', [http_1.Http])
+                __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder])
             ], LoginButtonComponent);
             exports_1("LoginButtonComponent", LoginButtonComponent);
         }

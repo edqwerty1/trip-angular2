@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
+import { FORM_PROVIDERS } from '@angular/common';
 import 'rxjs/add/operator/map';
 import {BannerComponent } from './banner.component';
 import {LocationsComponent } from './locations.component';
@@ -10,7 +11,8 @@ import {LocationStoreService} from './location-store.service';
     styleUrls: ['app/app.component.css'],
     providers: [
         HTTP_PROVIDERS,
-        LocationStoreService
+        LocationStoreService,
+        FORM_PROVIDERS
     ],
     directives: [BannerComponent, LocationsComponent]
 })

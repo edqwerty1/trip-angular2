@@ -6,28 +6,30 @@
     </modal-header>
     <modal-body>
         <h1>Login</h1>
-        <form role="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <form role="form" [ngFormModel]="loginFormModel" (ngSubmit)="onSubmit()" #loginForm="ngForm">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input autofocus type="text" required [(ngModel)]="model.username" 
-                ngControl="username" #username="ngForm" class="form-control"
-                id="username" placeholder="Username">
+                <input autofocus type="text" ngControl="username" #username="ngForm" class="form-control" id="username" placeholder="Username">
+                <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+                    Username is required
+                </div>
             </div>
-            <div [hidden]="username.valid" class="alert alert-danger">
-                Username is required
-            </div>
+
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" #password class="form-control" id="password" placeholder="Password">
+                <input type="password" #password="ngForm" ngControl="password" class="form-control" id="password" placeholder="Password">
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                    Password is required
+                </div>
             </div>
+
         </form>
 
     </modal-body>
     <modal-footer>
-        {{loginForm}}
         <button type="button" class="btn btn-primary pull-left" (click)="register()">Register</button>
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="close()">Cancel</button>
-        <button type="submit" class="btn btn-primary" (click)="test(loginForm)">Login</button>
+        <button type="submit" class="btn btn-primary" (click)="loginForm.ngSubmit.emit()">Login</button>
     </modal-footer>
 
 </modal>

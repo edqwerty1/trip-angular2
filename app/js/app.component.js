@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map', './banner.component', './locations.component', './location-store.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/operator/map', './banner.component', './locations.component', './location-store.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map', './b
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, banner_component_1, locations_component_1, location_store_service_1;
+    var core_1, http_1, common_1, banner_component_1, locations_component_1, location_store_service_1;
     var AppComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map', './b
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             },
             function (_1) {},
             function (banner_component_1_1) {
@@ -43,7 +46,8 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map', './b
                     styleUrls: ['app/app.component.css'],
                     providers: [
                         http_1.HTTP_PROVIDERS,
-                        location_store_service_1.LocationStoreService
+                        location_store_service_1.LocationStoreService,
+                        common_1.FORM_PROVIDERS
                     ],
                     directives: [banner_component_1.BannerComponent, locations_component_1.LocationsComponent]
                 }), 
