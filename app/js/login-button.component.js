@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(exports_1, context_1) {
+System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(expor
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_bs3_modal_1;
+    var core_1, ng2_bs3_modal_1, http_1;
     var LoginButtonComponent;
     return {
         setters:[
@@ -19,14 +19,38 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(expor
             },
             function (ng2_bs3_modal_1_1) {
                 ng2_bs3_modal_1 = ng2_bs3_modal_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             let LoginButtonComponent = class LoginButtonComponent {
+                constructor(_http) {
+                    this._http = _http;
+                    this.submitted = false;
+                    this.model = { username: "", password: "" };
+                }
                 close() {
                     this.modal.close();
                 }
-                save() {
-                    this.modal.close();
+                test(form) {
+                    console.log(form);
+                    form.ngSubmit.emit();
+                }
+                onSubmit() {
+                    console.log("submitted");
+                    console.log(this.model);
+                }
+                login() {
+                    this.submitted = true;
+                    let body = JSON.stringify(this.modal);
+                    this._http.post('http://localhost:3001/sessions/create', body, { headers: contentHeaders })
+                        .subscribe(response => {
+                        localStorage.setItem('jwt', response.json().id_token);
+                    }, error => {
+                        alert(error.text());
+                        console.log(error.text());
+                    });
                 }
             };
             __decorate([
@@ -39,7 +63,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal'], function(expor
                     templateUrl: 'app/login-button.component.html',
                     directives: [ng2_bs3_modal_1.MODAL_DIRECTIVES]
                 }), 
-                __metadata('design:paramtypes', [])
+                __metadata('design:paramtypes', [http_1.Http])
             ], LoginButtonComponent);
             exports_1("LoginButtonComponent", LoginButtonComponent);
         }
