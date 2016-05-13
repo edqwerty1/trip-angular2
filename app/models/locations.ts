@@ -9,6 +9,6 @@ export interface ILocation {
     price: number;
     imageUrl: string;
     nights: number;
-    upVotes: number;
-    downVotes: number;
+    upVotes: string[];
+    downVotes: string[];
 }

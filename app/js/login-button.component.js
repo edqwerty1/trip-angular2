@@ -47,6 +47,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
                     this._http.post('http://localhost:3001/sessions/create', body, { headers: contentHeaders })
                         .subscribe(response => {
                         localStorage.setItem('jwt', response.json().id_token);
+                        localStorage.setItem('userId', response.json().userId);
                     }, error => {
                         alert(error.text());
                         console.log(error.text());

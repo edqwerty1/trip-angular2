@@ -44,6 +44,24 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                     }, error => console.log(error));
                 }
                 ;
+                upVote(locationId) {
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    this._http.post(`http://localhost:8080/api/location/${locationId}/upVote`, JSON.stringify({ 'userId': localStorage.getItem('userId') }), { headers: headers })
+                        .map(response => response.json())
+                        .subscribe(data => {
+                        this.loadLocations();
+                    }, error => console.log(error));
+                }
+                downVote(locationId) {
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    this._http.post(`http://localhost:8080/api/location/${locationId}/downVote`, JSON.stringify({ 'userId': localStorage.getItem('userId') }), { headers: headers })
+                        .map(response => response.json())
+                        .subscribe(data => {
+                        this.loadLocations();
+                    }, error => console.log(error));
+                }
             };
             LocationStoreService = __decorate([
                 core_1.Injectable(), 

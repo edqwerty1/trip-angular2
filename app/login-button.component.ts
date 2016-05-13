@@ -11,23 +11,23 @@ export class LoginButtonComponent {
     @ViewChild('loginModal')
     modal: ModalComponent;
 
-submitted = false;
-model = { username: "", password: ""}
-constructor(private _http: Http){
-    
-}
+    submitted = false;
+    model = { username: "", password: "" }
+    constructor(private _http: Http) {
+
+    }
     close() {
         this.modal.close();
     }
-test(form){
-    console.log(form);
-    form.ngSubmit.emit();
-}
+    test(form) {
+        console.log(form);
+        form.ngSubmit.emit();
+    }
 
-onSubmit(){
-    console.log("submitted");
-     console.log(this.model);
-}
+    onSubmit() {
+        console.log("submitted");
+        console.log(this.model);
+    }
 
     login() {
         this.submitted = true;
@@ -36,6 +36,7 @@ onSubmit(){
             .subscribe(
             response => {
                 localStorage.setItem('jwt', response.json().id_token);
+                localStorage.setItem('userId', response.json().userId);
             },
             error => {
                 alert(error.text());

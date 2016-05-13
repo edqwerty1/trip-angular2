@@ -1,3 +1,5 @@
+
+
 {
     "locations": [{
     "id": "f6775c95-3e75-4e7a-94de-78b1a8084644",
@@ -13,8 +15,8 @@
     "price": 1650.00,
     "imageUrl": "https://acarroll2myking.files.wordpress.com/2014/07/sunshine_145918109.jpg",
     "nights": 2,
-    "upvotes": 0,
-    "downvotes": 0
+    "upVotes": ["5ac3fc62-4775-48c4-8ca2-18833e4d8c3b"],
+    "downVotes": []
 },
 {
     "id": "c9cfa319-e26b-4774-a7f7-bd249d6e93a0",
@@ -30,8 +32,8 @@
     "price": 2000.00,
     "imageUrl": "https://acarroll2myking.files.wordpress.com/2014/07/sunshine_145918109.jpg",
     "nights": 2,
-    "upvotes": 0,
-    "downvotes": 0
+    "upVotes": [],
+    "downVotes": ["5ac3fc62-4775-48c4-8ca2-18833e4d8c3b", "4e63377e-5360-4c0c-858c-dcd88b6b394e" ]
 }
     ]
 }
