@@ -18,7 +18,7 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGzz_tZMrgkoArtY3GmnsWoJsAoNJ8fM&callback=_initMap';
+            url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGzz_tZMrgkoArtY3GmnsWoJsAoNJ8fM&callback=_initMap&region=GB';
             let MapService = class MapService {
                 constructor() {
                     this.loadAPI = new Promise((resolve) => {

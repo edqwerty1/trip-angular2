@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-const url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGzz_tZMrgkoArtY3GmnsWoJsAoNJ8fM&callback=_initMap'
+const url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGzz_tZMrgkoArtY3GmnsWoJsAoNJ8fM&callback=_initMap&region=GB'
 @Injectable()
 export class MapService {
     loadAPI: Promise<any>

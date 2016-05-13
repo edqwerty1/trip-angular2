@@ -31,7 +31,4 @@ export class LocationStoreService {
             error => console.log(error)
             );
     };
-
-    
-
 }
