@@ -1,24 +1,34 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-import {Http, Response, Headers} from '@angular/http';
 import { FormBuilder, Validators } from '@angular/common';
-
+import {UserStoreService} from './user.service';
+import {Observable} from 'rxjs/RX';
+import {IUser} from './models/user';
 @Component({
     selector: 'login-button',
     templateUrl: 'app/login-button.component.html',
     directives: [MODAL_DIRECTIVES]
 })
-export class LoginButtonComponent {
+export class LoginButtonComponent implements OnInit {
     @ViewChild('loginModal')
     modal: ModalComponent;
     submitted = false;
     loginFormModel: any;
+    user$: Observable<IUser>;
+    user: IUser;
 
-    constructor(private _http: Http, private _formBuilder: FormBuilder) {
+    constructor(private _userService: UserStoreService, private _formBuilder: FormBuilder) {
         this.loginFormModel = this._formBuilder.group({
             'username': ['', Validators.required],
             'password': ['', Validators.required]
         });
+    }
+
+    ngOnInit() {
+        this.user$ = this._userService.user$;
+        this.user$.subscribe((data) => {
+            this.user = data;
+        })
     }
 
     close() {
@@ -39,16 +49,6 @@ export class LoginButtonComponent {
 
     login() {
         this.submitted = true;
-        let body = JSON.stringify({ "username": this.loginFormModel.value.username, "password": this.loginFormModel.value.password });
-        this._http.post('http://localhost:8080/api/session/create', body)
-            .map((res: Response) => res.json())
-            .subscribe(response => {
-                localStorage.setItem('jwt', response.token);
-                localStorage.setItem('userId', response.json().userId);
-            },
-            error => {
-                alert(error.text());
-                console.log(error.text());
-            });
+        this._userService.login(this.loginFormModel.value.username, this.loginFormModel.value.password);
     }
 }

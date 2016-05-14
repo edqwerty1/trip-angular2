@@ -19,6 +19,7 @@ export class LocationStoreService {
         this.locations$ = new Observable(observer => this._locationsObserver = observer)
             .startWith(this._dataStore.locations)
             .share();
+            
     };
 
     loadLocations() {

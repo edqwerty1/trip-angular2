@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http', '@angular/common'], function(exports_1, context_1) {
+System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/common', './user.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_bs3_modal_1, http_1, common_1;
+    var core_1, ng2_bs3_modal_1, common_1, user_service_1;
     var LoginButtonComponent;
     return {
         setters:[
@@ -20,21 +20,27 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
             function (ng2_bs3_modal_1_1) {
                 ng2_bs3_modal_1 = ng2_bs3_modal_1_1;
             },
-            function (http_1_1) {
-                http_1 = http_1_1;
-            },
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (user_service_1_1) {
+                user_service_1 = user_service_1_1;
             }],
         execute: function() {
             let LoginButtonComponent = class LoginButtonComponent {
-                constructor(_http, _formBuilder) {
-                    this._http = _http;
+                constructor(_userService, _formBuilder) {
+                    this._userService = _userService;
                     this._formBuilder = _formBuilder;
                     this.submitted = false;
                     this.loginFormModel = this._formBuilder.group({
                         'username': ['', common_1.Validators.required],
                         'password': ['', common_1.Validators.required]
+                    });
+                }
+                ngOnInit() {
+                    this.user$ = this._userService.user$;
+                    this.user$.subscribe((data) => {
+                        this.user = data;
                     });
                 }
                 close() {
@@ -53,20 +59,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
                 }
                 login() {
                     this.submitted = true;
-                    let body = JSON.stringify({ "username": this.loginFormModel.value.username, "password": this.loginFormModel.value.password });
-                    this._http.post('http://localhost:8080/api/session/create', body)
-                        .map((res) => res.json())
-                        .subscribe(response => {
-<<<<<<< HEAD
-                        localStorage.setItem('jwt', response.json().id_token);
-                        localStorage.setItem('userId', response.json().userId);
-=======
-                        localStorage.setItem('jwt', response.token);
->>>>>>> d6f2db769c02cc981c05b70e2d9d2cdbd41aeef6
-                    }, error => {
-                        alert(error.text());
-                        console.log(error.text());
-                    });
+                    this._userService.login(this.loginFormModel.value.username, this.loginFormModel.value.password);
                 }
             };
             __decorate([
@@ -79,7 +72,7 @@ System.register(['@angular/core', 'ng2-bs3-modal/ng2-bs3-modal', '@angular/http'
                     templateUrl: 'app/login-button.component.html',
                     directives: [ng2_bs3_modal_1.MODAL_DIRECTIVES]
                 }), 
-                __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder])
+                __metadata('design:paramtypes', [user_service_1.UserStoreService, common_1.FormBuilder])
             ], LoginButtonComponent);
             exports_1("LoginButtonComponent", LoginButtonComponent);
         }
