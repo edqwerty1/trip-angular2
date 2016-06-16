@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/operator/map', './banner.component', './locations.component', './map.component', './location-store.service', './map.service', './user.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/operator/map', './banner.component', './locations.component', './show-map.component', './location-store.service', './map.service', './user.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, common_1, banner_component_1, locations_component_1, map_component_1, location_store_service_1, map_service_1, user_service_1;
+    var core_1, http_1, common_1, banner_component_1, locations_component_1, show_map_component_1, location_store_service_1, map_service_1, user_service_1;
     var AppComponent;
     return {
         setters:[
@@ -30,8 +30,8 @@ System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/
             function (locations_component_1_1) {
                 locations_component_1 = locations_component_1_1;
             },
-            function (map_component_1_1) {
-                map_component_1 = map_component_1_1;
+            function (show_map_component_1_1) {
+                show_map_component_1 = show_map_component_1_1;
             },
             function (location_store_service_1_1) {
                 location_store_service_1 = location_store_service_1_1;
@@ -59,7 +59,7 @@ System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/
                             map_service_1.MapService,
                             user_service_1.UserStoreService
                         ],
-                        directives: [banner_component_1.BannerComponent, locations_component_1.LocationsComponent, map_component_1.MapComponent]
+                        directives: [banner_component_1.BannerComponent, locations_component_1.LocationsComponent, show_map_component_1.ShowMapComponent]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

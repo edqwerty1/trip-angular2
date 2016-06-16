@@ -3,6 +3,7 @@ const url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGzz_tZMrgkoArtY
 @Injectable()
 export class MapService {
     loadAPI: Promise<any>
+    initialised: boolean;
     constructor() {
         this.loadAPI = new Promise((resolve) => {
             window['_initMap'] = (ev) => {
@@ -14,7 +15,12 @@ export class MapService {
     }
 
     initialise() {
+        if (this.initialised){
+            return;
+        }
+
         this.loadScript();
+        this.initialised = true;
     }
 
     loadScript() {

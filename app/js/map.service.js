@@ -29,7 +29,11 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                     });
                 }
                 MapService.prototype.initialise = function () {
+                    if (this.initialised) {
+                        return;
+                    }
                     this.loadScript();
+                    this.initialised = true;
                 };
                 MapService.prototype.loadScript = function () {
                     console.log('loading..');

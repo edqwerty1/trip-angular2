@@ -14,6 +14,4 @@ export class BannerComponent {
         this.shrink = document.body.scrollTop > 50;
 
   }
-    
-        
 }

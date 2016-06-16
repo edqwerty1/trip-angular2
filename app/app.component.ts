@@ -4,7 +4,7 @@ import { FORM_PROVIDERS } from '@angular/common';
 import 'rxjs/add/operator/map';
 import {BannerComponent } from './banner.component';
 import {LocationsComponent } from './locations.component';
-import {MapComponent } from './map.component';
+import {ShowMapComponent } from './show-map.component';
 import {LocationStoreService} from './location-store.service';
 import {MapService} from './map.service';
 import {UserStoreService} from './user.service';
@@ -20,7 +20,7 @@ import {UserStoreService} from './user.service';
         MapService,
         UserStoreService
     ],
-    directives: [BannerComponent, LocationsComponent, MapComponent]
+    directives: [BannerComponent, LocationsComponent, ShowMapComponent]
 })
 export class AppComponent {
     title = 'Trip Planner Implemented with Angular 2.0';
