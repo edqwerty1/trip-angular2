@@ -8,6 +8,7 @@ import {MapComponent } from './map.component';
 import {LocationStoreService} from './location-store.service';
 import {MapService} from './map.service';
 import {UserStoreService} from './user.service';
+
 @Component({
     selector: 'my-app',
     templateUrl: 'app/app.component.html',

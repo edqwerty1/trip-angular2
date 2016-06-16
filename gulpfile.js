@@ -8,7 +8,8 @@ var gulp = require('gulp'),
     Config = require('./gulpfile.config'),
     tsProject = tsc.createProject('tsconfig.json'),
     gnf = require('gulp-npm-files'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    systemBuilder = require('systemjs-builder');
 var config = new Config();
 
 
@@ -57,6 +58,22 @@ gulp.task('watch', ['browserSync'], function() {
     gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts']);
     gulp.watch('app/*.html', browserSync.reload);
     gulp.watch('app/js/**/*.js', browserSync.reload);
+});
+
+gulp.task('dist', function() {
+    var builder = new systemBuilder();
+
+    builder.loadConfig('./systemjs.config.js')
+  .then(function(){
+	  return builder.buildStatic('app', 'dist/bundle.min.js', {
+		  minify: true,
+		  mangle: true,
+		  rollup: true
+	  });
+  })
+  .then(function(){
+	  console.log('bundle built successfully!');
+  });
 });
 
 gulp.task('serve', ['ts-lint','compile-ts','watch'], function() {

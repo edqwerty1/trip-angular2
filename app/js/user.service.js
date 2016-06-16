@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator/share', 'rxjs/add/operator/startWith'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator/share', 'rxjs/add/operator/startWith', './hosts'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, RX_1;
+    var core_1, http_1, RX_1, hosts_1;
     var UserStoreService;
     return {
         setters:[
@@ -24,40 +24,46 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                 RX_1 = RX_1_1;
             },
             function (_1) {},
-            function (_2) {}],
+            function (_2) {},
+            function (hosts_1_1) {
+                hosts_1 = hosts_1_1;
+            }],
         execute: function() {
-            let UserStoreService = class UserStoreService {
-                constructor(_http) {
+            UserStoreService = (function () {
+                function UserStoreService(_http) {
+                    var _this = this;
                     this._http = _http;
                     this._dataStore = { user: { displayName: null, id: null, username: null } };
-                    this.user$ = new RX_1.Observable(observer => this._userObserver = observer)
+                    this.user$ = new RX_1.Observable(function (observer) { return _this._userObserver = observer; })
                         .startWith(this._dataStore.user)
                         .share();
                 }
                 ;
-                login(username, password) {
-                    let body = JSON.stringify({ "username": username, "password": password });
+                UserStoreService.prototype.login = function (username, password) {
+                    var _this = this;
+                    var body = JSON.stringify({ 'username': username, 'password': password });
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
-                    this._http.post('http://localhost:8080/api/session/create', body, { headers: headers })
-                        .map((res) => res.json())
-                        .subscribe(response => {
+                    this._http.post(hosts_1.Hosts.Host + "/user/login", body, { headers: headers })
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (response) {
                         localStorage.setItem('jwt', response.token);
                         localStorage.setItem('userId', response.userId);
-                        this._dataStore.user.displayName = response.displayName;
-                        this._dataStore.user.username = response.username;
-                        this._dataStore.user.id = response.id;
-                        this._userObserver.next(this._dataStore.user);
-                    }, error => {
+                        _this._dataStore.user.displayName = response.displayName;
+                        _this._dataStore.user.username = response.username;
+                        _this._dataStore.user.id = response.id;
+                        _this._userObserver.next(_this._dataStore.user);
+                    }, function (error) {
                         alert(error.text());
                         console.log(error.text());
                     });
-                }
-            };
-            UserStoreService = __decorate([
-                core_1.Injectable(), 
-                __metadata('design:paramtypes', [http_1.Http])
-            ], UserStoreService);
+                };
+                UserStoreService = __decorate([
+                    core_1.Injectable(), 
+                    __metadata('design:paramtypes', [http_1.Http])
+                ], UserStoreService);
+                return UserStoreService;
+            }());
             exports_1("UserStoreService", UserStoreService);
         }
     }

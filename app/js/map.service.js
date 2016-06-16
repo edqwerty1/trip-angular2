@@ -19,31 +19,32 @@ System.register(['@angular/core'], function(exports_1, context_1) {
             }],
         execute: function() {
             url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGzz_tZMrgkoArtY3GmnsWoJsAoNJ8fM&callback=_initMap&region=GB';
-            let MapService = class MapService {
-                constructor() {
-                    this.loadAPI = new Promise((resolve) => {
-                        window['_initMap'] = (ev) => {
+            MapService = (function () {
+                function MapService() {
+                    this.loadAPI = new Promise(function (resolve) {
+                        window['_initMap'] = function (ev) {
                             console.log('gapi loaded');
                             resolve(window.google.maps);
                         };
                     });
                 }
-                initialise() {
+                MapService.prototype.initialise = function () {
                     this.loadScript();
-                }
-                loadScript() {
+                };
+                MapService.prototype.loadScript = function () {
                     console.log('loading..');
-                    let node = document.createElement('script');
+                    var node = document.createElement('script');
                     node.src = url;
                     node.async = true;
                     node.defer = true;
                     document.getElementsByTagName('head')[0].appendChild(node);
-                }
-            };
-            MapService = __decorate([
-                core_1.Injectable(), 
-                __metadata('design:paramtypes', [])
-            ], MapService);
+                };
+                MapService = __decorate([
+                    core_1.Injectable(), 
+                    __metadata('design:paramtypes', [])
+                ], MapService);
+                return MapService;
+            }());
             exports_1("MapService", MapService);
         }
     }

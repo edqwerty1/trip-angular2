@@ -4,7 +4,7 @@ import {Http, Response, Headers} from '@angular/http';
 import {Observable, Observer} from 'rxjs/RX';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/startWith';
-
+import {Hosts} from './hosts';
 @Injectable()
 export class UserStoreService {
     user$: Observable<IUser>;
@@ -22,10 +22,10 @@ export class UserStoreService {
     };
 
     login(username: string, password: string) {
-        let body = JSON.stringify({ "username": username, "password": password });
+        let body = JSON.stringify({ 'username': username, 'password': password });
          var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this._http.post('http://localhost:8080/api/session/create', body, { headers: headers })
+        this._http.post(`${Hosts.Host}/user/login`, body, { headers: headers })
             .map((res: Response) => res.json())
             .subscribe(response => {
                 localStorage.setItem('jwt', response.token);

@@ -24,24 +24,25 @@ System.register(['@angular/core', './location-store.service', './location-thumbn
                 location_thumbnail_component_1 = location_thumbnail_component_1_1;
             }],
         execute: function() {
-            let LocationsComponent = class LocationsComponent {
-                constructor(_locationsStore) {
+            LocationsComponent = (function () {
+                function LocationsComponent(_locationsStore) {
                     this._locationsStore = _locationsStore;
                 }
-                ngOnInit() {
+                LocationsComponent.prototype.ngOnInit = function () {
                     this.locations = this._locationsStore.locations$;
                     this._locationsStore.loadLocations();
-                    this.locations.subscribe(data => console.log(data));
-                }
-            };
-            LocationsComponent = __decorate([
-                core_1.Component({
-                    selector: 'locations',
-                    templateUrl: 'app/locations.component.html',
-                    directives: [location_thumbnail_component_1.LocationThumbnailComponent]
-                }), 
-                __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
-            ], LocationsComponent);
+                    this.locations.subscribe(function (data) { return console.log(data); });
+                };
+                LocationsComponent = __decorate([
+                    core_1.Component({
+                        selector: 'locations',
+                        templateUrl: 'app/locations.component.html',
+                        directives: [location_thumbnail_component_1.LocationThumbnailComponent]
+                    }), 
+                    __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
+                ], LocationsComponent);
+                return LocationsComponent;
+            }());
             exports_1("LocationsComponent", LocationsComponent);
         }
     }

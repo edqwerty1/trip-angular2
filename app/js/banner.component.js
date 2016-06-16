@@ -24,23 +24,24 @@ System.register(['@angular/core', '@angular/platform-browser/src/facade/browser'
                 login_button_component_1 = login_button_component_1_1;
             }],
         execute: function() {
-            let BannerComponent = class BannerComponent {
-                constructor() {
+            BannerComponent = (function () {
+                function BannerComponent() {
                     this.shrink = false;
                 }
-                onScroll(event) {
+                BannerComponent.prototype.onScroll = function (event) {
                     this.shrink = browser_1.document.body.scrollTop > 50;
-                }
-            };
-            BannerComponent = __decorate([
-                core_1.Component({
-                    selector: 'banner-shrink',
-                    templateUrl: 'app/banner.component.html',
-                    styleUrls: ['app/banner.component.css'],
-                    directives: [login_button_component_1.LoginButtonComponent]
-                }), 
-                __metadata('design:paramtypes', [])
-            ], BannerComponent);
+                };
+                BannerComponent = __decorate([
+                    core_1.Component({
+                        selector: 'banner-shrink',
+                        templateUrl: 'app/banner.component.html',
+                        styleUrls: ['app/banner.component.css'],
+                        directives: [login_button_component_1.LoginButtonComponent]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], BannerComponent);
+                return BannerComponent;
+            }());
             exports_1("BannerComponent", BannerComponent);
         }
     }

@@ -1,22 +1,24 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { FormBuilder, Validators } from '@angular/common';
 import {UserStoreService} from './user.service';
 import {Observable} from 'rxjs/RX';
 import {IUser} from './models/user';
+import {Modal, IModalOptions} from './modal';
+
 @Component({
     selector: 'login-button',
     templateUrl: 'app/login-button.component.html',
-    directives: [MODAL_DIRECTIVES]
+    directives: []
 })
 export class LoginButtonComponent implements OnInit {
     @ViewChild('loginModal')
-    modal: ModalComponent;
     submitted = false;
     loginFormModel: any;
     user$: Observable<IUser>;
     user: IUser;
-
+    modal: Modal;
+    modalContent = `
+    `;
     constructor(private _userService: UserStoreService, private _formBuilder: FormBuilder) {
         this.loginFormModel = this._formBuilder.group({
             'username': ['', Validators.required],
@@ -25,6 +27,16 @@ export class LoginButtonComponent implements OnInit {
     }
 
     ngOnInit() {
+        var newDiv = document.getElementById("login-button-modal");
+        var modalOptions: IModalOptions = {
+            backdrop: true,
+            keyboard: true,
+            duration: 0,
+            overlay: document.getElementById("login-button-modal-overlay")
+            // content: this.modalContent
+        };
+        this.modal = new Modal(newDiv, modalOptions);
+
         this.user$ = this._userService.user$;
         this.user$.subscribe((data) => {
             this.user = data;

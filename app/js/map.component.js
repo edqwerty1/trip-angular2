@@ -24,68 +24,68 @@ System.register(['@angular/core', './map.service', './location-store.service'], 
                 location_store_service_1 = location_store_service_1_1;
             }],
         execute: function() {
-            let MapComponent = class MapComponent {
-                constructor(_mapService, _locationStore) {
+            MapComponent = (function () {
+                function MapComponent(_mapService, _locationStore) {
                     this._mapService = _mapService;
                     this._locationStore = _locationStore;
                 }
-                ngOnInit() {
+                MapComponent.prototype.ngOnInit = function () {
+                    var _this = this;
                     this.locations = this._locationStore.locations$;
                     var map;
-                    this._mapService.loadAPI.then((mapsAPi) => {
+                    this._mapService.loadAPI.then(function (mapsAPi) {
                         console.log("Promise hit!");
-                        this.map = map = new mapsAPi.Map(document.getElementById('map'), {
+                        _this.map = map = new mapsAPi.Map(document.getElementById('map'), {
                             center: { lat: 52.12, lng: -1.24 },
                             zoom: 8
                         });
                         var geocoder = new mapsAPi.Geocoder();
-                        this.locations.subscribe(locations => {
-                            for (let loc in locations) {
-                                let location = locations[loc];
-                                geocoder.geocode({ 'address': `${location.address.address1}, ${location.address.postCode}` }, (results, status) => {
+                        _this.locations.subscribe(function (locations) {
+                            var _loop_1 = function(loc) {
+                                var location_1 = locations[loc];
+                                geocoder.geocode({ 'address': location_1.address.address1 + ", " + location_1.address.postCode }, function (results, status) {
                                     if (status === mapsAPi.GeocoderStatus.OK) {
-                                        let contentString = `
-                            <div>
-                                <h3>${location.name}</h3>
-                                <p>Price £${location.price}}</p>
-                                <p>Nights ${location.nights}</p>
-                            </div>`;
-                                        let infowindow = new mapsAPi.InfoWindow({
+                                        var contentString = "\n                            <div>\n                                <h3>" + location_1.name + "</h3>\n                                <p>Price \u00A3" + location_1.price + "}</p>\n                                <p>Nights " + location_1.nights + "</p>\n                            </div>";
+                                        var infowindow_1 = new mapsAPi.InfoWindow({
                                             content: contentString,
                                             maxWidth: 200
                                         });
-                                        let marker = new mapsAPi.Marker({
+                                        var marker_1 = new mapsAPi.Marker({
                                             position: results[0].geometry.location,
-                                            map: this.map,
-                                            title: location.name
+                                            map: _this.map,
+                                            title: location_1.name
                                         });
-                                        marker.addListener('click', function () {
-                                            infowindow.open(this.map, marker);
+                                        marker_1.addListener('click', function () {
+                                            infowindow_1.open(this.map, marker_1);
                                         });
-                                        infowindow.open(this.map, marker);
+                                        infowindow_1.open(_this.map, marker_1);
                                     }
                                     else {
                                         alert('Geocode was not successful for the following reason: ' + status);
                                     }
                                 });
+                            };
+                            for (var loc in locations) {
+                                _loop_1(loc);
                             }
                         });
-                        this._locationStore.loadLocations();
+                        _this._locationStore.loadLocations();
                     });
-                }
-                ngAfterViewInit() {
+                };
+                MapComponent.prototype.ngAfterViewInit = function () {
                     this._mapService.initialise();
-                }
-            };
-            MapComponent = __decorate([
-                core_1.Component({
-                    selector: 'maps',
-                    templateUrl: 'app/map.component.html',
-                    directives: [],
-                    styles: ['#map { height: 100%; }']
-                }), 
-                __metadata('design:paramtypes', [map_service_1.MapService, location_store_service_1.LocationStoreService])
-            ], MapComponent);
+                };
+                MapComponent = __decorate([
+                    core_1.Component({
+                        selector: 'maps',
+                        templateUrl: 'app/map.component.html',
+                        directives: [],
+                        styles: ['#map { height: 100%; }']
+                    }), 
+                    __metadata('design:paramtypes', [map_service_1.MapService, location_store_service_1.LocationStoreService])
+                ], MapComponent);
+                return MapComponent;
+            }());
             exports_1("MapComponent", MapComponent);
         }
     }

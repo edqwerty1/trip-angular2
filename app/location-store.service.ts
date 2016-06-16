@@ -4,6 +4,7 @@ import {Http, Response, Headers} from '@angular/http';
 import {Observable, Observer} from 'rxjs/RX';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/startWith';
+import {Hosts} from './hosts';
 
 @Injectable()
 export class LocationStoreService {
@@ -23,10 +24,11 @@ export class LocationStoreService {
     };
 
     loadLocations() {
-        this._http.get('/app/test-data/locations.json')
+        console.log(Hosts.Host);
+        this._http.get(`${Hosts.Host}/location/locations`)
             .map((res: Response) => res.json())
             .subscribe(data => {
-                this._dataStore.locations = data.locations;
+                this._dataStore.locations = data;
                 this._locationsObserver.next(this._dataStore.locations);
             },
             error => console.log(error)
@@ -36,7 +38,7 @@ export class LocationStoreService {
     upVote(locationId) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this._http.post(`http://localhost:8080/api/location/${locationId}/upVote`,
+        this._http.post(`${Hosts.Host}/location/${locationId}/upVote`,
             JSON.stringify({ 'userId': localStorage.getItem('userId') }),
             { headers: headers })
             .map(response => response.json())
@@ -49,7 +51,7 @@ export class LocationStoreService {
     downVote(locationId) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this._http.post(`http://localhost:8080/api/location/${locationId}/downVote`,
+        this._http.post(`${Hosts.Host}/location/${locationId}/downVote`,
             JSON.stringify({ 'userId': localStorage.getItem('userId') }),
             { headers: headers })
             .map(response => response.json())

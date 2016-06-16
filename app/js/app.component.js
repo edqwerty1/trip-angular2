@@ -43,27 +43,28 @@ System.register(['@angular/core', '@angular/http', '@angular/common', 'rxjs/add/
                 user_service_1 = user_service_1_1;
             }],
         execute: function() {
-            let AppComponent = class AppComponent {
-                constructor() {
+            AppComponent = (function () {
+                function AppComponent() {
                     this.title = 'Trip Planner Implemented with Angular 2.0';
                 }
-            };
-            AppComponent = __decorate([
-                core_1.Component({
-                    selector: 'my-app',
-                    templateUrl: 'app/app.component.html',
-                    styleUrls: ['app/app.component.css'],
-                    providers: [
-                        http_1.HTTP_PROVIDERS,
-                        location_store_service_1.LocationStoreService,
-                        common_1.FORM_PROVIDERS,
-                        map_service_1.MapService,
-                        user_service_1.UserStoreService
-                    ],
-                    directives: [banner_component_1.BannerComponent, locations_component_1.LocationsComponent, map_component_1.MapComponent]
-                }), 
-                __metadata('design:paramtypes', [])
-            ], AppComponent);
+                AppComponent = __decorate([
+                    core_1.Component({
+                        selector: 'my-app',
+                        templateUrl: 'app/app.component.html',
+                        styleUrls: ['app/app.component.css'],
+                        providers: [
+                            http_1.HTTP_PROVIDERS,
+                            location_store_service_1.LocationStoreService,
+                            common_1.FORM_PROVIDERS,
+                            map_service_1.MapService,
+                            user_service_1.UserStoreService
+                        ],
+                        directives: [banner_component_1.BannerComponent, locations_component_1.LocationsComponent, map_component_1.MapComponent]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], AppComponent);
+                return AppComponent;
+            }());
             exports_1("AppComponent", AppComponent);
         }
     }

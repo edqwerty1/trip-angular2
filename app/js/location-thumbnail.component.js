@@ -24,21 +24,22 @@ System.register(['@angular/core', './location-store.service', './vote.component'
                 vote_component_1 = vote_component_1_1;
             }],
         execute: function() {
-            let LocationThumbnailComponent = class LocationThumbnailComponent {
-                constructor(_locationsStore) {
+            LocationThumbnailComponent = (function () {
+                function LocationThumbnailComponent(_locationsStore) {
                     this._locationsStore = _locationsStore;
                 }
                 ;
-            };
-            LocationThumbnailComponent = __decorate([
-                core_1.Component({
-                    selector: 'location-thumbnail',
-                    templateUrl: 'app/location-thumbnail.component.html',
-                    inputs: ['location'],
-                    directives: [vote_component_1.VoteComponent]
-                }), 
-                __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
-            ], LocationThumbnailComponent);
+                LocationThumbnailComponent = __decorate([
+                    core_1.Component({
+                        selector: 'location-thumbnail',
+                        templateUrl: 'app/location-thumbnail.component.html',
+                        inputs: ['location'],
+                        directives: [vote_component_1.VoteComponent]
+                    }), 
+                    __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
+                ], LocationThumbnailComponent);
+                return LocationThumbnailComponent;
+            }());
             exports_1("LocationThumbnailComponent", LocationThumbnailComponent);
         }
     }

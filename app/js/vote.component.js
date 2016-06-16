@@ -21,35 +21,36 @@ System.register(['@angular/core', './location-store.service'], function(exports_
                 location_store_service_1 = location_store_service_1_1;
             }],
         execute: function() {
-            let VoteComponent = class VoteComponent {
-                constructor(_locationsStore) {
+            VoteComponent = (function () {
+                function VoteComponent(_locationsStore) {
                     this._locationsStore = _locationsStore;
                 }
-                ngOnInit() {
+                VoteComponent.prototype.ngOnInit = function () {
                     this.score = this.location.upVotes.length - this.location.downVotes.length;
-                    this.upVoted = !this.location.upVotes.every((id) => id !== localStorage.getItem('userId'));
-                    this.downVoted = !this.location.downVotes.every((id) => id !== localStorage.getItem('userId'));
-                }
-                upVote() {
+                    this.upVoted = !this.location.upVotes.every(function (id) { return id !== localStorage.getItem('userId'); });
+                    this.downVoted = !this.location.downVotes.every(function (id) { return id !== localStorage.getItem('userId'); });
+                };
+                VoteComponent.prototype.upVote = function () {
                     this._locationsStore.upVote(this.location.id);
-                }
-                downVote() {
+                };
+                VoteComponent.prototype.downVote = function () {
                     this._locationsStore.downVote(this.location.id);
-                }
-            };
-            __decorate([
-                core_1.Input(), 
-                __metadata('design:type', Object)
-            ], VoteComponent.prototype, "location", void 0);
-            VoteComponent = __decorate([
-                core_1.Component({
-                    selector: 'vote',
-                    templateUrl: 'app/vote.component.html',
-                    directives: [],
-                    styles: [".cursor-fix { cursor: default; }"]
-                }), 
-                __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
-            ], VoteComponent);
+                };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], VoteComponent.prototype, "location", void 0);
+                VoteComponent = __decorate([
+                    core_1.Component({
+                        selector: 'vote',
+                        templateUrl: 'app/vote.component.html',
+                        directives: [],
+                        styles: [".cursor-fix { cursor: default; }"]
+                    }), 
+                    __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
+                ], VoteComponent);
+                return VoteComponent;
+            }());
             exports_1("VoteComponent", VoteComponent);
         }
     }
