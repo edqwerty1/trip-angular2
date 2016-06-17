@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/common', './user.service', './modal'], function(exports_1, context_1) {
+System.register(['@angular/core', './user.service', './login-modal.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,78 +10,43 @@ System.register(['@angular/core', '@angular/common', './user.service', './modal'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, user_service_1, modal_1;
+    var core_1, user_service_1, login_modal_component_1;
     var LoginButtonComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
-            },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
             },
-            function (modal_1_1) {
-                modal_1 = modal_1_1;
+            function (login_modal_component_1_1) {
+                login_modal_component_1 = login_modal_component_1_1;
             }],
         execute: function() {
             LoginButtonComponent = (function () {
-                function LoginButtonComponent(_userService, _formBuilder) {
+                function LoginButtonComponent(_userService) {
                     this._userService = _userService;
-                    this._formBuilder = _formBuilder;
-                    this.submitted = false;
-                    this.modalContent = "\n    ";
-                    this.loginFormModel = this._formBuilder.group({
-                        'username': ['', common_1.Validators.required],
-                        'password': ['', common_1.Validators.required]
-                    });
+                    this.modalOpen = false;
                 }
+                LoginButtonComponent.prototype.openModal = function () {
+                    this.modalOpen = true;
+                };
                 LoginButtonComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    var newDiv = document.getElementById("login-button-modal");
-                    var modalOptions = {
-                        backdrop: true,
-                        keyboard: true,
-                        duration: 0,
-                        overlay: document.getElementById("login-button-modal-overlay")
-                    };
-                    this.modal = new modal_1.Modal(newDiv, modalOptions);
                     this.user$ = this._userService.user$;
                     this.user$.subscribe(function (data) {
                         _this.user = data;
+                        console.log(data);
                     });
                 };
-                LoginButtonComponent.prototype.close = function () {
-                    this.modal.close();
-                };
-                LoginButtonComponent.prototype.onSubmit = function () {
-                    this.loginFormModel.markAsDirty();
-                    for (var control in this.loginFormModel.controls) {
-                        this.loginFormModel.controls[control].markAsDirty();
-                    }
-                    ;
-                    if (this.loginFormModel.dirty && this.loginFormModel.valid) {
-                        this.login();
-                        this.modal.close();
-                    }
-                };
-                LoginButtonComponent.prototype.login = function () {
-                    this.submitted = true;
-                    this._userService.login(this.loginFormModel.value.username, this.loginFormModel.value.password);
-                };
-                __decorate([
-                    core_1.ViewChild('loginModal'), 
-                    __metadata('design:type', Object)
-                ], LoginButtonComponent.prototype, "submitted", void 0);
                 LoginButtonComponent = __decorate([
                     core_1.Component({
                         selector: 'login-button',
                         templateUrl: 'app/login-button.component.html',
-                        directives: []
+                        directives: [login_modal_component_1.LoginModalComponent]
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserStoreService, common_1.FormBuilder])
+                    __metadata('design:paramtypes', [user_service_1.UserStoreService])
                 ], LoginButtonComponent);
                 return LoginButtonComponent;
             }());

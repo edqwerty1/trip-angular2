@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/platform-browser/src/facade/browser', './login-button.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/platform-browser/src/facade/browser', './login-button.component', './register-button.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/platform-browser/src/facade/browser'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, login_button_component_1;
+    var core_1, browser_1, login_button_component_1, register_button_component_1;
     var BannerComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['@angular/core', '@angular/platform-browser/src/facade/browser'
             },
             function (login_button_component_1_1) {
                 login_button_component_1 = login_button_component_1_1;
+            },
+            function (register_button_component_1_1) {
+                register_button_component_1 = register_button_component_1_1;
             }],
         execute: function() {
             BannerComponent = (function () {
@@ -36,7 +39,7 @@ System.register(['@angular/core', '@angular/platform-browser/src/facade/browser'
                         selector: 'banner-shrink',
                         templateUrl: 'app/banner.component.html',
                         styleUrls: ['app/banner.component.css'],
-                        directives: [login_button_component_1.LoginButtonComponent]
+                        directives: [login_button_component_1.LoginButtonComponent, register_button_component_1.RegisterButtonComponent]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], BannerComponent);

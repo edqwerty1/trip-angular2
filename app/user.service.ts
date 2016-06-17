@@ -21,13 +21,14 @@ export class UserStoreService {
             .share();
     };
 
-    login(username: string, password: string) {
+    login(username: string, password: string): Promise<IUser> {
         let body = JSON.stringify({ 'username': username, 'password': password });
          var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this._http.post(`${Hosts.Host}/user/login`, body, { headers: headers })
+        return this._http.post(`${Hosts.Host}/user/login`, body, { headers: headers })
             .map((res: Response) => res.json())
-            .subscribe(response => {
+            .toPromise()
+            .then(response => {
                 localStorage.setItem('jwt', response.token);
                 localStorage.setItem('userId', response.userId);
                 
@@ -35,10 +36,25 @@ export class UserStoreService {
                 this._dataStore.user.username = response.username;
                 this._dataStore.user.id = response.id;
                 this._userObserver.next(this._dataStore.user);
-            },
-            error => {
-                alert(error.text());
-                console.log(error.text());
             });
+    }
+
+    register(username: string, password: string, displayName: string): Promise<IUser> {
+        let body = JSON.stringify({ 'username': username, 'password': password, 'displayName': displayName });
+         var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http.post(`${Hosts.Host}/user/create`, body, { headers: headers })
+            .map((res: Response) => res.json())
+            .toPromise()
+            .then(response => {
+                localStorage.setItem('jwt', response.token);
+                localStorage.setItem('userId', response.userId);
+                
+                this._dataStore.user.displayName = response.displayName;
+                this._dataStore.user.username = response.username;
+                this._dataStore.user.id = response.id;
+                this._userObserver.next(this._dataStore.user);
+            }
+            );
     }
 }

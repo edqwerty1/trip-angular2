@@ -44,18 +44,33 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                     var body = JSON.stringify({ 'username': username, 'password': password });
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
-                    this._http.post(hosts_1.Hosts.Host + "/user/login", body, { headers: headers })
+                    return this._http.post(hosts_1.Hosts.Host + "/user/login", body, { headers: headers })
                         .map(function (res) { return res.json(); })
-                        .subscribe(function (response) {
+                        .toPromise()
+                        .then(function (response) {
                         localStorage.setItem('jwt', response.token);
                         localStorage.setItem('userId', response.userId);
                         _this._dataStore.user.displayName = response.displayName;
                         _this._dataStore.user.username = response.username;
                         _this._dataStore.user.id = response.id;
                         _this._userObserver.next(_this._dataStore.user);
-                    }, function (error) {
-                        alert(error.text());
-                        console.log(error.text());
+                    });
+                };
+                UserStoreService.prototype.register = function (username, password, displayName) {
+                    var _this = this;
+                    var body = JSON.stringify({ 'username': username, 'password': password, 'displayName': displayName });
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    return this._http.post(hosts_1.Hosts.Host + "/user/create", body, { headers: headers })
+                        .map(function (res) { return res.json(); })
+                        .toPromise()
+                        .then(function (response) {
+                        localStorage.setItem('jwt', response.token);
+                        localStorage.setItem('userId', response.userId);
+                        _this._dataStore.user.displayName = response.displayName;
+                        _this._dataStore.user.username = response.username;
+                        _this._dataStore.user.id = response.id;
+                        _this._userObserver.next(_this._dataStore.user);
                     });
                 };
                 UserStoreService = __decorate([
