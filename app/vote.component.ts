@@ -7,7 +7,7 @@ import {ILocation} from './models/locations';
     selector: 'vote',
     templateUrl: 'app/vote.component.html',
     directives: [],
-    styles: [".cursor-fix { cursor: default; }"]
+    styles: ['.cursor-fix { cursor: default; }']
 })
 export class VoteComponent implements OnInit {
     @Input() location: ILocation;
@@ -15,20 +15,20 @@ export class VoteComponent implements OnInit {
     upVoted: boolean;
     downVoted: boolean;
     constructor(private _locationsStore: LocationStoreService) {
-        
+
     }
 
     ngOnInit() {
-       this.score = this.location.upVotes.length - this.location.downVotes.length
+       this.score = this.location.upVotes.length - this.location.downVotes.length;
        this.upVoted = !this.location.upVotes.every((id) => id !== localStorage.getItem('userId'));
-       this.downVoted = !this.location.downVotes.every((id) => id !== localStorage.getItem('userId'))
+       this.downVoted = !this.location.downVotes.every((id) => id !== localStorage.getItem('userId'));
     }
-    
-    upVote(){
-        this._locationsStore.upVote(this.location.id)
+
+    upVote() {
+        this._locationsStore.upVote(this.location.id);
     }
-    
-    downVote(){
-        this._locationsStore.downVote(this.location.id)
+
+    downVote() {
+        this._locationsStore.downVote(this.location.id);
     }
 }

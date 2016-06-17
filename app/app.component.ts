@@ -24,5 +24,4 @@ import {UserStoreService} from './user.service';
 })
 export class AppComponent {
     title = 'Trip Planner Implemented with Angular 2.0';
-    
 }

@@ -23,7 +23,6 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 function MapService() {
                     this.loadAPI = new Promise(function (resolve) {
                         window['_initMap'] = function (ev) {
-                            console.log('gapi loaded');
                             resolve(window.google.maps);
                         };
                     });
@@ -36,7 +35,6 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                     this.initialised = true;
                 };
                 MapService.prototype.loadScript = function () {
-                    console.log('loading..');
                     var node = document.createElement('script');
                     node.src = url;
                     node.async = true;

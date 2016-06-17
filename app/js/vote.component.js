@@ -45,7 +45,7 @@ System.register(['@angular/core', './location-store.service'], function(exports_
                         selector: 'vote',
                         templateUrl: 'app/vote.component.html',
                         directives: [],
-                        styles: [".cursor-fix { cursor: default; }"]
+                        styles: ['.cursor-fix { cursor: default; }']
                     }), 
                     __metadata('design:paramtypes', [location_store_service_1.LocationStoreService])
                 ], VoteComponent);

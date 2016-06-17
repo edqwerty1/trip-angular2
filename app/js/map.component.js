@@ -34,7 +34,6 @@ System.register(['@angular/core', './map.service', './location-store.service'], 
                     this.locations = this._locationStore.locations$;
                     var map;
                     this._mapService.loadAPI.then(function (mapsAPi) {
-                        console.log("Promise hit!");
                         _this.map = map = new mapsAPi.Map(document.getElementById('map'), {
                             center: { lat: 52.12, lng: -1.24 },
                             zoom: 8
@@ -42,28 +41,30 @@ System.register(['@angular/core', './map.service', './location-store.service'], 
                         var geocoder = new mapsAPi.Geocoder();
                         _this.locations.subscribe(function (locations) {
                             var _loop_1 = function(loc) {
-                                var location_1 = locations[loc];
-                                geocoder.geocode({ 'address': location_1.address.address1 + ", " + location_1.address.postCode }, function (results, status) {
-                                    if (status === mapsAPi.GeocoderStatus.OK) {
-                                        var contentString = "\n                            <div>\n                                <h3>" + location_1.name + "</h3>\n                                <p>Price \u00A3" + location_1.price + "}</p>\n                                <p>Nights " + location_1.nights + "</p>\n                            </div>";
-                                        var infowindow_1 = new mapsAPi.InfoWindow({
-                                            content: contentString,
-                                            maxWidth: 200
-                                        });
-                                        var marker_1 = new mapsAPi.Marker({
-                                            position: results[0].geometry.location,
-                                            map: _this.map,
-                                            title: location_1.name
-                                        });
-                                        marker_1.addListener('click', function () {
-                                            infowindow_1.open(this.map, marker_1);
-                                        });
-                                        infowindow_1.open(_this.map, marker_1);
-                                    }
-                                    else {
-                                        alert('Geocode was not successful for the following reason: ' + status);
-                                    }
-                                });
+                                if (locations.hasOwnProperty(loc)) {
+                                    var location_1 = locations[loc];
+                                    geocoder.geocode({ 'address': location_1.address.address1 + ", " + location_1.address.postCode }, function (results, status) {
+                                        if (status === mapsAPi.GeocoderStatus.OK) {
+                                            var contentString = "\n                            <div>\n                                <h3>" + location_1.name + "</h3>\n                                <p>Price \u00A3" + location_1.price + "}</p>\n                                <p>Nights " + location_1.nights + "</p>\n                            </div>";
+                                            var infowindow_1 = new mapsAPi.InfoWindow({
+                                                content: contentString,
+                                                maxWidth: 200
+                                            });
+                                            var marker_1 = new mapsAPi.Marker({
+                                                position: results[0].geometry.location,
+                                                map: _this.map,
+                                                title: location_1.name
+                                            });
+                                            marker_1.addListener('click', function () {
+                                                infowindow_1.open(this.map, marker_1);
+                                            });
+                                            infowindow_1.open(_this.map, marker_1);
+                                        }
+                                        else {
+                                            alert('Geocode was not successful for the following reason: ' + status);
+                                        }
+                                    });
+                                }
                             };
                             for (var loc in locations) {
                                 _loop_1(loc);

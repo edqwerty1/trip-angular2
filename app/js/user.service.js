@@ -49,7 +49,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                         .toPromise()
                         .then(function (response) {
                         localStorage.setItem('jwt', response.token);
-                        localStorage.setItem('userId', response.userId);
+                        localStorage.setItem('userId', response.id);
                         _this._dataStore.user.displayName = response.displayName;
                         _this._dataStore.user.username = response.username;
                         _this._dataStore.user.id = response.id;
@@ -66,7 +66,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                         .toPromise()
                         .then(function (response) {
                         localStorage.setItem('jwt', response.token);
-                        localStorage.setItem('userId', response.userId);
+                        localStorage.setItem('userId', response.id);
                         _this._dataStore.user.displayName = response.displayName;
                         _this._dataStore.user.username = response.username;
                         _this._dataStore.user.id = response.id;

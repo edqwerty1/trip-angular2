@@ -55,7 +55,6 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     this._http.post(hosts_1.Hosts.Host + "/location/" + locationId + "/upVote", JSON.stringify({ 'userId': localStorage.getItem('userId') }), { headers: headers })
-                        .map(function (response) { return response.json(); })
                         .subscribe(function (data) {
                         _this.loadLocations();
                     }, function (error) { return console.log(error); });
@@ -65,7 +64,6 @@ System.register(['@angular/core', '@angular/http', 'rxjs/RX', 'rxjs/add/operator
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     this._http.post(hosts_1.Hosts.Host + "/location/" + locationId + "/downVote", JSON.stringify({ 'userId': localStorage.getItem('userId') }), { headers: headers })
-                        .map(function (response) { return response.json(); })
                         .subscribe(function (data) {
                         _this.loadLocations();
                     }, function (error) { return console.log(error); });

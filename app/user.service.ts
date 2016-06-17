@@ -16,12 +16,12 @@ export class UserStoreService {
     constructor(private _http: Http) {
         this._dataStore = {user: { displayName: null, id: null, username: null}};
 
-        this.user$ = new Observable(observer => this._userObserver = observer)
+        this.user$ = new Observable<IUser>(observer => this._userObserver = observer)
             .startWith(this._dataStore.user)
             .share();
     };
 
-    login(username: string, password: string): Promise<IUser> {
+    login(username: string, password: string): Promise<void> {
         let body = JSON.stringify({ 'username': username, 'password': password });
          var headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -30,8 +30,8 @@ export class UserStoreService {
             .toPromise()
             .then(response => {
                 localStorage.setItem('jwt', response.token);
-                localStorage.setItem('userId', response.userId);
-                
+                localStorage.setItem('userId', response.id);
+
                 this._dataStore.user.displayName = response.displayName;
                 this._dataStore.user.username = response.username;
                 this._dataStore.user.id = response.id;
@@ -39,7 +39,7 @@ export class UserStoreService {
             });
     }
 
-    register(username: string, password: string, displayName: string): Promise<IUser> {
+    register(username: string, password: string, displayName: string): Promise<void> {
         let body = JSON.stringify({ 'username': username, 'password': password, 'displayName': displayName });
          var headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -48,8 +48,8 @@ export class UserStoreService {
             .toPromise()
             .then(response => {
                 localStorage.setItem('jwt', response.token);
-                localStorage.setItem('userId', response.userId);
-                
+                localStorage.setItem('userId', response.id);
+
                 this._dataStore.user.displayName = response.displayName;
                 this._dataStore.user.username = response.username;
                 this._dataStore.user.id = response.id;

@@ -17,10 +17,9 @@ export class LocationStoreService {
     constructor(private _http: Http) {
         this._dataStore = { locations: [] };
 
-        this.locations$ = new Observable(observer => this._locationsObserver = observer)
+        this.locations$ = new Observable<ILocation[]>(observer => this._locationsObserver = observer)
             .startWith(this._dataStore.locations)
             .share();
-            
     };
 
     loadLocations() {
@@ -41,7 +40,6 @@ export class LocationStoreService {
         this._http.post(`${Hosts.Host}/location/${locationId}/upVote`,
             JSON.stringify({ 'userId': localStorage.getItem('userId') }),
             { headers: headers })
-            .map(response => response.json())
             .subscribe(data => {
                 this.loadLocations();
             }, error => console.log(error));
@@ -54,7 +52,6 @@ export class LocationStoreService {
         this._http.post(`${Hosts.Host}/location/${locationId}/downVote`,
             JSON.stringify({ 'userId': localStorage.getItem('userId') }),
             { headers: headers })
-            .map(response => response.json())
             .subscribe(data => {
                 this.loadLocations();
             }, error => console.log(error));

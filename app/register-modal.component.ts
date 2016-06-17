@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/common';
 import {UserStoreService} from './user.service';
 import {Observable} from 'rxjs/RX';
@@ -9,7 +9,7 @@ import {Modal, IModalOptions} from './modal';
     templateUrl: 'app/register-modal.component.html',
     directives: []
 })
-export class RegisterModalComponent implements OnInit, AfterViewInit {
+export class RegisterModalComponent implements AfterViewInit {
     submitted = false;
     registerFormModel: any;
     modal: Modal;
@@ -25,7 +25,7 @@ export class RegisterModalComponent implements OnInit, AfterViewInit {
         });
     }
 
-ngAfterViewInit(){
+ngAfterViewInit() {
 var newDiv = document.getElementById('register-button-modal');
         var modalOptions: IModalOptions = {
             backdrop: true,
@@ -38,10 +38,6 @@ var newDiv = document.getElementById('register-button-modal');
         this.modal.open();
         this.open.emit(null);
 }
-
-    ngOnInit() {
-    }
-
     closeModal() {
         this.modal.close();
          this.close.emit(null);
@@ -50,7 +46,9 @@ var newDiv = document.getElementById('register-button-modal');
     onSubmit() {
         this.registerFormModel.markAsDirty();
         for (let control in this.registerFormModel.controls) {
-            this.registerFormModel.controls[control].markAsDirty();
+            if (this.registerFormModel.controls.hasOwnProperty(control)) {
+                this.registerFormModel.controls[control].markAsDirty();
+            }
         };
 
         if (this.registerFormModel.dirty && this.registerFormModel.valid) {
@@ -62,7 +60,8 @@ var newDiv = document.getElementById('register-button-modal');
 
     register() {
         this.submitted = true;
-        this._userService.register(this.registerFormModel.value.username, this.registerFormModel.value.password, this.registerFormModel.value.displayname)
+        this._userService.register(this.registerFormModel.value.username,
+                    this.registerFormModel.value.password, this.registerFormModel.value.displayname)
         .then(() => {
             this.modal.close();
             this.close.emit(null);

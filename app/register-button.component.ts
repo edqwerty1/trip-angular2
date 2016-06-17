@@ -17,7 +17,7 @@ export class RegisterButtonComponent implements OnInit {
     constructor(private _userService: UserStoreService) {
 
     }
-    
+
     openModal() {
         this.modalOpen = true;
     }
@@ -27,6 +27,6 @@ export class RegisterButtonComponent implements OnInit {
         this.user$.subscribe((data) => {
             this.user = data;
             this.showButton = false;
-        })
+        });
     }
 }

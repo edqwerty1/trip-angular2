@@ -9,7 +9,7 @@ import {Modal, IModalOptions} from './modal';
     templateUrl: 'app/login-modal.component.html',
     directives: []
 })
-export class LoginModalComponent implements OnInit, AfterViewInit {
+export class LoginModalComponent implements AfterViewInit {
     submitted = false;
     loginFormModel: any;
     modal: Modal;
@@ -24,7 +24,7 @@ export class LoginModalComponent implements OnInit, AfterViewInit {
         });
     }
 
-ngAfterViewInit(){
+ngAfterViewInit() {
 var newDiv = document.getElementById('login-button-modal');
         var modalOptions: IModalOptions = {
             backdrop: true,
@@ -38,9 +38,6 @@ var newDiv = document.getElementById('login-button-modal');
         this.open.emit(null);
 }
 
-    ngOnInit() {
-    }
-
     closeModal() {
         this.modal.close();
          this.close.emit(null);
@@ -49,11 +46,13 @@ var newDiv = document.getElementById('login-button-modal');
     onSubmit() {
         this.loginFormModel.markAsDirty();
         for (let control in this.loginFormModel.controls) {
-            this.loginFormModel.controls[control].markAsDirty();
+            if (this.loginFormModel.controls.hasOwnProperty(control)) {
+                this.loginFormModel.controls[control].markAsDirty();
+            }
         };
 
         if (this.loginFormModel.dirty && this.loginFormModel.valid) {
-            this.login(); 
+            this.login();
         }
     }
 
@@ -67,6 +66,6 @@ var newDiv = document.getElementById('login-button-modal');
             error => {
                 alert(error.text());
                 console.log(error.text());
-            });;
+            });
     }
 }
